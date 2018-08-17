@@ -1,4 +1,6 @@
 use std::env;
+use std::fs;
+use std::io::prelude::*;
 
 fn main() {
     // collect gets an iterator and turns it into a collection
@@ -10,5 +12,9 @@ fn main() {
 
     println!("Searching for {}", query);
     println!("In file {}", filename);
-    println!("{:?}", args);
+
+    let contents = fs::read_to_string(filename)
+        .expect("Something went wrong reading the file");
+
+    println!("With text:\n{}", contents);
 }
