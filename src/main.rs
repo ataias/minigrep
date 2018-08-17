@@ -1,7 +1,9 @@
+extern crate minigrep;
+
 use std::env;
-use std::fs;
-// use std::io::prelude::*;
 use std::process;
+
+use minigrep::Config;
 
 fn main() {
     // collect gets an iterator and turns it into a collection
@@ -15,25 +17,9 @@ fn main() {
     println!("Searching for {}", config.query);
     println!("In file {}", config.filename);
 
-    let contents =
-        fs::read_to_string(config.filename).expect("Something went wrong reading the file");
+    if let Err(e) = minigrep::run(config) {
+        println!("Application error: {}", e);
 
-    println!("With text:\n{}", contents);
-}
-
-struct Config {
-    query: String,
-    filename: String,
-}
-
-impl Config {
-    fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-             return Err("not enough arguments");
-        }
-        let query = args[1].clone();
-        let filename = args[2].clone();
-
-        Ok(Config { query, filename })
+        process::exit(1);
     }
 }
