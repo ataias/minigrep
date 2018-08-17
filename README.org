@@ -1,0 +1,2 @@
+* minigrep
+Follow along of a project in the Rust Book
