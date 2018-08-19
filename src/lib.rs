@@ -1,6 +1,10 @@
-use std::env;
+//! # Minigrep
+//!
+//! A program to search text lines for a contained string
+
 use std::error::Error;
 use std::fs;
+use std::env;
 
 pub struct Config {
     pub query: String,
@@ -52,13 +56,14 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 ///
 /// # Examples
 /// ```
+/// extern crate minigrep;
 /// let query = "rUsT";
 /// let contents = "\
 /// Rust:
 /// safe, fast, productive.
 /// Pick three.
 /// Trust me.";
-/// search(&query, &contents)
+/// let result = minigrep::search(&query, &contents);
 /// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
