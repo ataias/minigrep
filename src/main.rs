@@ -6,11 +6,7 @@ use std::process;
 use minigrep::Config;
 
 fn main() {
-    // collect gets an iterator and turns it into a collection
-    // it needs to be annotated
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
